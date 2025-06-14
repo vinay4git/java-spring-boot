@@ -2,6 +2,9 @@ package com.java.practise.service;
 
 import com.java.practise.database.dao.User;
 import com.java.practise.database.respositories.UserRepository;
+import com.java.practise.exception.JavaSpringBootAppErrorCodes;
+import com.java.practise.exception.JavaSpringBootAppException;
+import com.java.practise.model.UserDetailsV1Response;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,14 +35,15 @@ public class UseV1Service {
         userRepository.saveAll(List.of(userVinay,userKumar));
     }
 
-    public User getUser(String id) {
+    public UserDetailsV1Response getUser(String id) {
         return userRepository.findById(id)
-                .map(user -> User.builder()
+                .map(user -> UserDetailsV1Response.builder()
                         .id(user.getId())
                         .domain(user.getDomain())
                         .emailId(user.getEmailId())
                         .name(user.getName())
-                        .build()).orElse(null);
+                        .build())
+                .orElseThrow(() -> new JavaSpringBootAppException(JavaSpringBootAppErrorCodes.NO_USER_FOUND, "No user found with given Id."));
     }
 
 }
