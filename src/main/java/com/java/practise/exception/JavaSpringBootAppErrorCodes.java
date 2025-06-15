@@ -15,14 +15,14 @@ public enum JavaSpringBootAppErrorCodes {
 
     NO_USER_FOUND(1001, HttpStatus.NOT_FOUND);
 
-    private final Integer errorCode;
-    private final HttpStatus httpStatus;
-
-    private static final Map<Integer, JavaSpringBootAppErrorCodes> errorCodeMap ;
+    private static final Map<Integer, JavaSpringBootAppErrorCodes> errorCodeMap;
 
     static {
         errorCodeMap = Arrays.stream(JavaSpringBootAppErrorCodes.values()).collect(Collectors.toMap(JavaSpringBootAppErrorCodes::getErrorCode, Function.identity()));
     }
+
+    private final Integer errorCode;
+    private final HttpStatus httpStatus;
 
     public static JavaSpringBootAppErrorCodes getErrorByCode(Integer errorCode) {
         return errorCodeMap.get(errorCode);

@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/v1/user")
 public class UserV1Controller {
 
-    @Autowired private UseV1Service useV1Service;
+    @Autowired
+    private UseV1Service useV1Service;
 
     @GetMapping(path = "/details", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody

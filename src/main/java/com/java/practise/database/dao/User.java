@@ -24,7 +24,7 @@ public class User {
     @Column(name = "NAME")
     private String name;
 
-    @Column(name =  "DOMAIN")
+    @Column(name = "DOMAIN")
     private String domain;
 
     @Column(name = "EMAIL_ID")

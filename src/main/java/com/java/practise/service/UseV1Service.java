@@ -18,7 +18,8 @@ import java.util.List;
 public class UseV1Service {
 
     private static final Logger log = LoggerFactory.getLogger(UseV1Service.class);
-    @Autowired private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @PostConstruct
     private void init() {
@@ -34,7 +35,7 @@ public class UseV1Service {
                 .domain("civil")
                 .build();
 
-        userRepository.saveAll(List.of(userVinay,userKumar));
+        userRepository.saveAll(List.of(userVinay, userKumar));
     }
 
     public UserDetailsV1Response getUser(String id) {
