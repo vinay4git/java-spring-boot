@@ -6,16 +6,18 @@ import com.java.practise.exception.JavaSpringBootAppErrorCodes;
 import com.java.practise.exception.JavaSpringBootAppException;
 import com.java.practise.model.UserDetailsV1Response;
 import jakarta.annotation.PostConstruct;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 @Service
 public class UseV1Service {
 
+    private static final Logger log = LoggerFactory.getLogger(UseV1Service.class);
     @Autowired private UserRepository userRepository;
 
     @PostConstruct
@@ -43,7 +45,10 @@ public class UseV1Service {
                         .emailId(user.getEmailId())
                         .name(user.getName())
                         .build())
-                .orElseThrow(() -> new JavaSpringBootAppException(JavaSpringBootAppErrorCodes.NO_USER_FOUND, "No user found with given Id."));
+                .orElseThrow(() -> {
+                    log.error("No Element found for user id: {}", id);
+                    return new JavaSpringBootAppException(JavaSpringBootAppErrorCodes.NO_USER_FOUND, "No user found with given Id.");
+                });
     }
 
 }
