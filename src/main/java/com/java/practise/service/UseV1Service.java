@@ -1,5 +1,7 @@
 package com.java.practise.service;
 
+import com.java.practise.config.AppConfig;
+import com.java.practise.config.UserConfig;
 import com.java.practise.database.dao.User;
 import com.java.practise.database.respositories.UserRepository;
 import com.java.practise.exception.JavaSpringBootAppErrorCodes;
@@ -20,6 +22,11 @@ public class UseV1Service {
     private static final Logger log = LoggerFactory.getLogger(UseV1Service.class);
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private AppConfig appConfig;
+    @Autowired
+    private UserConfig userConfig;
+
 
     @PostConstruct
     private void init() {
@@ -39,6 +46,11 @@ public class UseV1Service {
     }
 
     public UserDetailsV1Response getUser(String id) {
+
+        System.out.println(appConfig.getUserNameMaximumLength());
+        System.out.println(userConfig.getDomainsAllowed());
+        System.out.println(userConfig.getMaxNameLength());
+        
         return userRepository.findById(id)
                 .map(user -> UserDetailsV1Response.builder()
                         .id(user.getId())
