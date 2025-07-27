@@ -17,9 +17,9 @@ import java.util.List;
 
 
 @Service
-public class UseV1Service {
+public class UserV1Service {
 
-    private static final Logger log = LoggerFactory.getLogger(UseV1Service.class);
+    private static final Logger log = LoggerFactory.getLogger(UserV1Service.class);
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -50,7 +50,7 @@ public class UseV1Service {
         System.out.println(appConfig.getUserNameMaximumLength());
         System.out.println(userConfig.getDomainsAllowed());
         System.out.println(userConfig.getMaxNameLength());
-        
+
         return userRepository.findById(id)
                 .map(user -> UserDetailsV1Response.builder()
                         .id(user.getId())
